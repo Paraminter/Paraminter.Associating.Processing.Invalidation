@@ -11,17 +11,50 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FF39BCC1-8250-4D47-9B0F-0A963268CB81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{32159448-17D1-46EB-81E0-DA61D7D33E8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B1CC58D2-70B4-4718-BEA2-2DD6A63BFFE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{5EC7B1ED-BE6A-4B99-BFAD-8A56DCEB5088}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5CDAC3CF-E376-4ACA-8DBD-2C8DDDF84D8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvalidityResettingAssociatorDecorator", "tests\unit\Core\InvalidityResettingAssociatorDecorator\InvalidityResettingAssociatorDecorator.csproj", "{C3A23275-B1B7-454C-BB1C-F118023B97C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvalidityReadingCompletionSettingAssociatorDecorator", "tests\unit\Core\InvalidityReadingCompletionSettingAssociatorDecorator\InvalidityReadingCompletionSettingAssociatorDecorator.csproj", "{D2A78D22-A307-4CC6-86FE-C5DCD4C69F60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32159448-17D1-46EB-81E0-DA61D7D33E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32159448-17D1-46EB-81E0-DA61D7D33E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32159448-17D1-46EB-81E0-DA61D7D33E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32159448-17D1-46EB-81E0-DA61D7D33E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A23275-B1B7-454C-BB1C-F118023B97C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A23275-B1B7-454C-BB1C-F118023B97C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A23275-B1B7-454C-BB1C-F118023B97C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A23275-B1B7-454C-BB1C-F118023B97C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2A78D22-A307-4CC6-86FE-C5DCD4C69F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2A78D22-A307-4CC6-86FE-C5DCD4C69F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2A78D22-A307-4CC6-86FE-C5DCD4C69F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2A78D22-A307-4CC6-86FE-C5DCD4C69F60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8BF900F-8E8F-47C1-A16F-1AE237548BDF}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{32159448-17D1-46EB-81E0-DA61D7D33E8B} = {FF39BCC1-8250-4D47-9B0F-0A963268CB81}
+		{5EC7B1ED-BE6A-4B99-BFAD-8A56DCEB5088} = {B1CC58D2-70B4-4718-BEA2-2DD6A63BFFE5}
+		{5CDAC3CF-E376-4ACA-8DBD-2C8DDDF84D8B} = {5EC7B1ED-BE6A-4B99-BFAD-8A56DCEB5088}
+		{C3A23275-B1B7-454C-BB1C-F118023B97C7} = {5CDAC3CF-E376-4ACA-8DBD-2C8DDDF84D8B}
+		{D2A78D22-A307-4CC6-86FE-C5DCD4C69F60} = {5CDAC3CF-E376-4ACA-8DBD-2C8DDDF84D8B}
 	EndGlobalSection
 EndGlobal

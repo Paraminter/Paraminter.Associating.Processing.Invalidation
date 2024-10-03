@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>Paraminter.Associating.Processing.Invalidation</AssemblyName>
+
+        <RootNamespace>Paraminter.Associating.Processing.Invalidation</RootNamespace>
+
+        <PackageId>Paraminter.Associating.Processing.Invalidation</PackageId>
+        <Description>Integrates Paraminter processing invalidation with Paraminter associating.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Paraminter.Associating.Commands" />
+        <PackageReference Include="Paraminter.Associating.Models" />
+        <PackageReference Include="Paraminter.Cqs.Commands.Handlers" />
+        <PackageReference Include="Paraminter.Cqs.Queries.Handlers" />
+        <PackageReference Include="Paraminter.Processing.Commands" />
+        <PackageReference Include="Paraminter.Processing.Invalidation.Commands" />
+        <PackageReference Include="Paraminter.Processing.Invalidation.Queries" />
+    </ItemGroup>
+
+</Project>
