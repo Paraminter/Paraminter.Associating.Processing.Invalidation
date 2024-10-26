@@ -7,23 +7,25 @@ using Paraminter.Associating.Models;
 using Paraminter.Processing.Invalidation.Commands;
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Xunit;
 
 public sealed class Handle
 {
     [Fact]
-    public void NullCommand_ThrowsArgumentNullException()
+    public async Task NullCommand_ThrowsArgumentNullException()
     {
         var fixture = FixtureFactory.Create<IAssociateArgumentsData>();
 
-        var result = Record.Exception(() => Target(fixture, null!));
+        var result = await Record.ExceptionAsync(() => Target(fixture, null!, CancellationToken.None));
 
         Assert.IsType<ArgumentNullException>(result);
     }
 
     [Fact]
-    public void ValidCommand_ResetsInvalidityBefore()
+    public async Task ValidCommand_ResetsInvalidityBefore()
     {
         var fixture = FixtureFactory.Create<IAssociateArgumentsData>();
 
@@ -31,20 +33,21 @@ public sealed class Handle
 
         var sequence = new MockSequence();
 
-        fixture.InvalidityResetterMock.InSequence(sequence).Setup(static (handler) => handler.Handle(It.IsAny<IResetProcessInvalidityCommand>()));
-        fixture.DecorateeMock.InSequence(sequence).Setup((handler) => handler.Handle(command));
+        fixture.InvalidityResetterMock.InSequence(sequence).Setup(static (handler) => handler.Handle(It.IsAny<IResetProcessInvalidityCommand>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+        fixture.DecorateeMock.InSequence(sequence).Setup((handler) => handler.Handle(command, It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 
-        Target(fixture, command);
+        await Target(fixture, command, CancellationToken.None);
 
-        fixture.InvalidityResetterMock.Verify(static (handler) => handler.Handle(It.IsAny<IResetProcessInvalidityCommand>()), Times.Once());
-        fixture.DecorateeMock.Verify((handler) => handler.Handle(command), Times.Once());
+        fixture.InvalidityResetterMock.Verify(static (handler) => handler.Handle(It.IsAny<IResetProcessInvalidityCommand>(), It.IsAny<CancellationToken>()), Times.Once());
+        fixture.DecorateeMock.Verify((handler) => handler.Handle(command, It.IsAny<CancellationToken>()), Times.Once());
     }
 
-    private static void Target<TData>(
+    private static async Task Target<TData>(
         IFixture<TData> fixture,
-        IAssociateArgumentsCommand<TData> command)
+        IAssociateArgumentsCommand<TData> command,
+        CancellationToken cancellationToken)
         where TData : IAssociateArgumentsData
     {
-        fixture.Sut.Handle(command);
+        await fixture.Sut.Handle(command, cancellationToken);
     }
 }

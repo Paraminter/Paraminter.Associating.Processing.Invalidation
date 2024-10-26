@@ -9,6 +9,8 @@ using Paraminter.Processing.Commands;
 using Paraminter.Processing.Invalidation.Queries;
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 /// <summary>Decorates an associator by setting the completion status after invoking the decoratee, if the invalidity status is not set.</summary>
 /// <typeparam name="TData">The type representing the data used to associate arguments with parameters.</typeparam>
@@ -36,19 +38,20 @@ public sealed class InvalidityReadingCompletionSettingAssociatorDecorator<TData>
         InvalidityReader = invalidityReader ?? throw new ArgumentNullException(nameof(invalidityReader));
     }
 
-    void ICommandHandler<IAssociateArgumentsCommand<TData>>.Handle(
-        IAssociateArgumentsCommand<TData> command)
+    async Task ICommandHandler<IAssociateArgumentsCommand<TData>>.Handle(
+        IAssociateArgumentsCommand<TData> command,
+        CancellationToken cancellationToken)
     {
         if (command is null)
         {
             throw new ArgumentNullException(nameof(command));
         }
 
-        Decoratee.Handle(command);
+        await Decoratee.Handle(command, cancellationToken).ConfigureAwait(false);
 
-        if (InvalidityReader.Handle(IsProcessInvalidatedQuery.Instance) is false)
+        if (await InvalidityReader.Handle(IsProcessInvalidatedQuery.Instance, cancellationToken).ConfigureAwait(false) is false)
         {
-            CompletionSetter.Handle(SetProcessCompletionCommand.Instance);
+            await CompletionSetter.Handle(SetProcessCompletionCommand.Instance, cancellationToken).ConfigureAwait(false);
         }
     }
 }
